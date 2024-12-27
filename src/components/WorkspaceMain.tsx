@@ -27,9 +27,9 @@ import {
     DialogContent,
 } from "../components/ui/dialog";
 import ReactMarkdown from "react-markdown";
-import { CSpinner } from "@coreui/react";
 import { Chart, registerables } from "chart.js";
 import { Bar, Line, Pie } from "react-chartjs-2";
+import { OrbitProgress } from "react-loading-indicators";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -773,13 +773,15 @@ Make sure that it’s easy to understand and contains the primary information in
     const downloadPDF = async () => {
         const doc = new jsPDF("p", "pt", "a4");
         const content = document.getElementById("report-content");
-        const downloadButton = document.querySelector("#download_button") as HTMLElement | null;;
+        const downloadButton = document.querySelector(
+            "#download_button"
+        ) as HTMLElement | null;
 
         if (!content) {
             alert("Content not found!");
             return;
         }
-        
+
         if (downloadButton) downloadButton.style.display = "none";
 
         const canvas = await html2canvas(content, {
@@ -1192,10 +1194,11 @@ Make sure that it’s easy to understand and contains the primary information in
                                     >
                                         {pullDataLoading ? (
                                             <div className="flex justify-center">
-                                                <CSpinner
-                                                    as="span"
-                                                    size="sm"
-                                                    aria-hidden="true"
+                                                <OrbitProgress
+                                                    color="#153415"
+                                                    size="small"
+                                                    text="Loading"
+                                                    textColor=""
                                                 />
                                             </div>
                                         ) : (
@@ -1331,11 +1334,18 @@ Make sure that it’s easy to understand and contains the primary information in
                                         disabled={generateReportLoading}
                                     >
                                         {generateReportLoading ? (
-                                            <div className="flex justify-center">
-                                                <CSpinner
-                                                    as="span"
-                                                    size="sm"
-                                                    aria-hidden="true"
+                                            <div
+                                                style={{
+                                                    width: "20px",
+                                                    height: "20px",
+                                                }}
+                                            >
+                                                <OrbitProgress
+                                                    variant="disc"
+                                                    color="#153415"
+                                                    size="small"
+                                                    text="loading"
+                                                    textColor=""
                                                 />
                                             </div>
                                         ) : (

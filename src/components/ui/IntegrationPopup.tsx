@@ -332,10 +332,6 @@ const IntegrationPopup: React.FC<IntegrationPopupProps> = ({ handlePopup }) => {
                                 <br />
                                 <select
                                     disabled={properties.length === 0}
-                                    onChange={(e) =>{
-                                        const selectedDisplayName = e.target.selectedOptions[0].dataset.displayName;
-                                        fetchReport(e.target.value, selectedDisplayName as string)
-                                    }}
                                     className="p-4 border}-2 rounded-3xl appearance-none outline-none"
                                 >
                                     <option disabled selected>
@@ -346,6 +342,7 @@ const IntegrationPopup: React.FC<IntegrationPopupProps> = ({ handlePopup }) => {
                                             <option
                                                 key={index}
                                                 value={property.name}
+                                                onClick={() => fetchReport(property.name, property.displayName)}
                                             >
                                                 {property.displayName}
                                             </option>
